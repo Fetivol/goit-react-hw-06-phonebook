@@ -19,32 +19,6 @@ export const App = () => {
   // );
   // const [filter, setFilters] = useState('');
 
-  // const addToContacts = contact => {
-  //   const existingContact = contacts.find(
-  //     c =>
-  //       c.name.toLowerCase() === contact.name.toLowerCase() ||
-  //       c.number === contact.number
-  //   );
-
-  //   if (existingContact) {
-  //     alert('Contact already exists!');
-  //   } else {
-  //     setContacts(prevContacts => [
-  //       ...prevContacts,
-  //       { id: nanoid(), ...contact },
-  //     ]);
-  //   }
-  // };
-
-  // const deleteContact = contactId => {
-  //   setContacts(prevContacts =>
-  //     prevContacts.filter(contact => contact.id !== contactId)
-  //   );
-  // };
-
-  // const handleChange = filter => {
-  //   setFilters(filter);
-  // };
   const contacts = useSelector(state => state.contacts);
   const filter = useSelector(state => state.filter);
   const visibleItems = contacts.filter(contact =>

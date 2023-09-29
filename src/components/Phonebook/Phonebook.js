@@ -69,30 +69,3 @@ export const Phonebook = () => {
     </Formik>
   );
 };
-
-// export const Phonebook = ({ onAdd }) => {
-//   return (
-//     <Formik
-//       initialValues={{ name: '', number: '' }}
-//       validationSchema={InputSchema}
-//       onSubmit={(values, actions) => {
-//         onAdd(values);
-//         actions.resetForm();
-//       }}
-//     >
-//       <StyledForm>
-//         <Label>
-//           Name
-//           <StyledField name="name" type="text" placeholder="name" />
-//           <StyledErrorMessage component="div" name="name" />
-//         </Label>
-//         <Label>
-//           Name
-//           <StyledField name="number" type="tel" placeholder="number" />
-//           <StyledErrorMessage component="div" name="number" />
-//         </Label>
-//         <Button type="submit">Submit</Button>
-//       </StyledForm>
-//     </Formik>
-//   );
-// };
