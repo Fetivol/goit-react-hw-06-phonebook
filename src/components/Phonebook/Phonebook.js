@@ -7,6 +7,9 @@ import {
   StyledField,
   StyledErrorMessage,
 } from './Phonebook.styled';
+import { nanoid } from 'nanoid';
+import { useDispatch, useSelector } from 'react-redux';
+import { newContact } from 'redux/actions';
 
 const InputSchema = Yup.object().shape({
   name: Yup.string()
@@ -27,13 +30,26 @@ const InputSchema = Yup.object().shape({
     .required('Required'),
 });
 
-export const Phonebook = ({ onAdd }) => {
+export const Phonebook = () => {
+  const contacts = useSelector(state => state.contacts);
+  const dispatch = useDispatch();
   return (
     <Formik
       initialValues={{ name: '', number: '' }}
       validationSchema={InputSchema}
       onSubmit={(values, actions) => {
-        onAdd(values);
+        const existingContact = contacts.find(
+          c =>
+            c.name.toLowerCase() === values.name.toLowerCase() ||
+            c.number === values.number
+        );
+
+        if (existingContact) {
+          alert('Contact already exists!');
+        } else {
+          dispatch(newContact({ id: nanoid(), ...values }));
+        }
+
         actions.resetForm();
       }}
     >
@@ -53,3 +69,30 @@ export const Phonebook = ({ onAdd }) => {
     </Formik>
   );
 };
+
+// export const Phonebook = ({ onAdd }) => {
+//   return (
+//     <Formik
+//       initialValues={{ name: '', number: '' }}
+//       validationSchema={InputSchema}
+//       onSubmit={(values, actions) => {
+//         onAdd(values);
+//         actions.resetForm();
+//       }}
+//     >
+//       <StyledForm>
+//         <Label>
+//           Name
+//           <StyledField name="name" type="text" placeholder="name" />
+//           <StyledErrorMessage component="div" name="name" />
+//         </Label>
+//         <Label>
+//           Name
+//           <StyledField name="number" type="tel" placeholder="number" />
+//           <StyledErrorMessage component="div" name="number" />
+//         </Label>
+//         <Button type="submit">Submit</Button>
+//       </StyledForm>
+//     </Formik>
+//   );
+// };

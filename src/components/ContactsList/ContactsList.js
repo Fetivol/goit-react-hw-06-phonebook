@@ -3,18 +3,23 @@ import {
   ListElem,
   Button,
 } from 'components/ContactsList/ContactsList.styled';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteContact } from 'redux/actions';
 
-export const ContactsList = ({ componentsData, onDelete }) => {
+export const ContactsList = ({ contacts }) => {
+  // const contacts = useSelector(state => state.contacts);
+  const dispatch = useDispatch();
+
   return (
     <List>
-      {componentsData.map(({ id, name, number }) => {
+      {contacts.map(({ id, name, number }) => {
         return (
           <ListElem key={id}>
             {name}: {number}
             <Button
               type="button"
               onClick={() => {
-                onDelete(id);
+                dispatch(deleteContact(id));
               }}
             >
               Delete
@@ -25,3 +30,23 @@ export const ContactsList = ({ componentsData, onDelete }) => {
     </List>
   );
 };
+//   return (
+//     <List>
+//       {componentsData.map(({ id, name, number }) => {
+//         return (
+//           <ListElem key={id}>
+//             {name}: {number}
+//             <Button
+//               type="button"
+//               onClick={() => {
+//                 onDelete(id);
+//               }}
+//             >
+//               Delete
+//             </Button>
+//           </ListElem>
+//         );
+//       })}
+//     </List>
+//   );
+// };

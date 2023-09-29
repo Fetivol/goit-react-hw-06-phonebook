@@ -1,6 +1,10 @@
+import { useDispatch, useSelector } from 'react-redux';
 import { Label, Input } from './Filter.styled';
+import { filterAction } from 'redux/actions';
 
-export const Filter = ({ filter, onChange }) => {
+export const Filter = () => {
+  const dispatch = useDispatch();
+  const filter = useSelector(state => state.filter);
   return (
     <Label>
       Find contacts by name
@@ -8,7 +12,7 @@ export const Filter = ({ filter, onChange }) => {
         type="text"
         value={filter}
         onChange={e => {
-          onChange(e.target.value);
+          dispatch(filterAction(e.target.value));
         }}
       ></Input>
     </Label>
