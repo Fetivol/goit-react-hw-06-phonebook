@@ -44,7 +44,6 @@ export const Phonebook = () => {
             c.name.toLowerCase() === values.name.toLowerCase() ||
             c.number === values.number
         );
-        console.log(existingContact);
         if (existingContact) {
           alert('Contact already exists!');
         } else {

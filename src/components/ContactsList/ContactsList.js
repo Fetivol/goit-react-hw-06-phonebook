@@ -11,7 +11,6 @@ export const ContactsList = () => {
   const dispatch = useDispatch();
 
   const visibleItems = useSelector(selectVisibleContacts);
-  console.log(visibleItems);
   return visibleItems.length > 0 ? (
     <List>
       {visibleItems.map(({ id, name, number }) => {
