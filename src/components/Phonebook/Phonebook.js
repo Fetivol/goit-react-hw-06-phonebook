@@ -7,9 +7,8 @@ import {
   StyledField,
   StyledErrorMessage,
 } from './Phonebook.styled';
-import { nanoid } from 'nanoid';
 import { useDispatch, useSelector } from 'react-redux';
-import { newContact } from 'redux/actions';
+import { newContact } from 'redux/contactsSlice';
 
 const InputSchema = Yup.object().shape({
   name: Yup.string()
@@ -32,6 +31,7 @@ const InputSchema = Yup.object().shape({
 
 export const Phonebook = () => {
   const contacts = useSelector(state => state.contacts);
+
   const dispatch = useDispatch();
   return (
     <Formik
@@ -43,13 +43,12 @@ export const Phonebook = () => {
             c.name.toLowerCase() === values.name.toLowerCase() ||
             c.number === values.number
         );
-
+        console.log(existingContact);
         if (existingContact) {
           alert('Contact already exists!');
         } else {
-          dispatch(newContact({ id: nanoid(), ...values }));
+          dispatch(newContact(values));
         }
-
         actions.resetForm();
       }}
     >
