@@ -9,6 +9,7 @@ import {
 } from './Phonebook.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { newContact } from 'redux/contactsSlice';
+import { selectContacts } from 'redux/selectors';
 
 const InputSchema = Yup.object().shape({
   name: Yup.string()
@@ -30,7 +31,7 @@ const InputSchema = Yup.object().shape({
 });
 
 export const Phonebook = () => {
-  const contacts = useSelector(state => state.contacts);
+  const contacts = useSelector(selectContacts);
 
   const dispatch = useDispatch();
   return (
